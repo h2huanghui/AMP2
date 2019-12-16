@@ -316,11 +316,33 @@ POST:action必须修改为action-xhr
 ```
 `AMP.setState()操作会将此对象常量合并到当前状态中。selected.slide的当前值便会替换为event.index的值`
 
-### 3.2 相应商品可被添加到购物车中(`amp-form`)
+### 3.2 点击幻灯片指示器中的某个点时，更新所选商品更新图片轮换展示内容 `[slide] tap`事件
 
-### 3.3 添加用于展示当时幻灯片和幻灯片总数的指示器
+```
+<amp-carousel 
+    type="slides" 
+    layout="fixed-height" 
+    height=250 
+    id="carousel" 
+    [slide]="selected.slide" 
+    on="slideChange:AMP.setState({selected:{slide:event.index}})">
+      <amp-img width=200 height=250 src="./shirts/black.jpg" ></amp-img>
+      <amp-img width=300 height=375 src="./shirts/black.jpg" ></amp-img>
+      <amp-img width=400 height=500 src="./shirts/black.jpg"></amp-img>
+</amp-carousel>
 
-### 3.4 用户另选了衬衫颜色，更改图片轮换展示内容
+<p class="dots">
+      <span [class]="selected.slide == 0 ? 'current' : ''" class="current" on="tap:carousel.goToSlide(index=0)"></span>
+      <span [class]="selected.slide == 1 ? 'current' : ''" on="tap:carousel.goToSlide(index=1)"></span>
+      <span [class]="selected.slide == 2 ? 'current' : ''" on="tap:carousel.goToSlide(index=2)"></span>    
+</p>
+```
+
+### 3.3 相应商品可被添加到购物车中(`amp-form`)
+
+### 3.4 添加用于展示当时幻灯片和幻灯片总数的指示器
+
+### 3.5 用户另选了衬衫颜色，更改图片轮换展示内容
 
 
 
