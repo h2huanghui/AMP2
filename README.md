@@ -276,7 +276,51 @@ POST:action必须修改为action-xhr
 ```
 
 # 六、互动式网页实战
-## 1. 
+## 1. advanced-interactivity-in-amp文件,`npm i`
+## 2. `node app.js`
+## 3.功能
+### 首先引入`amp-bind`
+`<script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>`
+
+### 作用：
+通过将元素属性绑定到自定义表达式来发挥作用,使用`amp-state`组件对此状态进行初始化
+```
+<amp-state id="selected">
+  <script type="application/json">
+      {
+        "slide": 0
+      }
+  </script>
+</amp-state>
+```
+通过`selected.slide`来访问变量
+### 3.1 图片轮换内容(`amp-carousel`)展示相应商品的多个视图
+`amp-carousel元素添加"on"操作`
+```
+<amp-carousel 
+  type="slides" 
+  layout="fixed-height"
+  height=250 
+  id="carousel"
+  on="slideChange:AMP.setState({selected:{slide:event.index}})"
+>
+```
+幻灯片更改时，会使用参数(如下)调用AMP.setState操作
+```
+{
+  selected: {
+    slide: event.index //新幻灯片的索引
+  }
+}
+
+```
+`AMP.setState()操作会将此对象常量合并到当前状态中。selected.slide的当前值便会替换为event.index的值`
+
+### 3.2 相应商品可被添加到购物车中(`amp-form`)
+
+### 3.3 添加用于展示当时幻灯片和幻灯片总数的指示器
+
+### 3.4 用户另选了衬衫颜色，更改图片轮换展示内容
 
 
 
